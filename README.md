@@ -11,13 +11,14 @@ Authors:
 
 Overview:
 
-PLEASE PROVIDE AN OVERVIEW OF THE PROJECT FOR THOSE WHO MIGHT NOT
-OTHERWISE UNDERSTAND IT.
+Creates a matrix by using associative arrays from CSC207 Mini Project 4
 
 ---
 
 Citations:
-
+<https://github.com/sheeleybGrinnell/mp-associative-arrays-maven>
+https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/mps/mp06.html
+CSC207 Mentors
 ---
 
 This code may be found at <https://github.com/sheeleybGrinnell/mp-matrices-maven>. 

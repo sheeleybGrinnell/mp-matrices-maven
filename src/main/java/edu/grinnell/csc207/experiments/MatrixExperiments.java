@@ -97,6 +97,7 @@ public class MatrixExperiments {
 
     sample.fillRegion(4, 2, 6, 6, ".");
     figure(pen, "fillRegion(4, 2, 6, 6, \".\")", sample);
+
   } // assignmentSample()
 
   // +------+--------------------------------------------------------
