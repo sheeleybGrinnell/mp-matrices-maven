@@ -1,7 +1,6 @@
 package edu.grinnell.csc207.util;
 
-import edu.grinnell.csc207.util.AssociativeArrays.*;;
-
+import edu.grinnell.csc207.util.AssociativeArrays.AssociativeArray;
 /**
  * An implementation of two-dimensional matrices.
  *
@@ -16,12 +15,24 @@ public class MatrixV0<T> implements Matrix<T> {
   // | Fields |
   // +--------+
 
+  /**
+   * The height of our matrix.
+   */
   int height;
 
+  /**
+   * The width of our matrix.
+   */
   int width;
 
+  /**
+   * The default value used to fill our matrix.
+   */
   T defaultVal;
 
+  /**
+   * How we store our matrix. An associative array with the coordinates as string tied to some val.
+   */
   AssociativeArray<String, T> matrixArray;
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -50,11 +61,11 @@ public class MatrixV0<T> implements Matrix<T> {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
           matrixArray.set("(" + i + "," + j + ")", def);
-        }
-      }
+        } //for
+      } //for
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
-    }
+    } //try/catch
   } // MatrixV0(int, int, T)
 
   /**
@@ -93,7 +104,7 @@ public class MatrixV0<T> implements Matrix<T> {
   public T get(int row, int col) {
     if (((row < 0) | (row >= this.height)) | ((col < 0) | (col >= this.width))) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     try {
       return matrixArray.get("(" + row + "," + col + ")");
     } catch (KeyNotFoundException e) {
@@ -117,13 +128,13 @@ public class MatrixV0<T> implements Matrix<T> {
   public void set(int row, int col, T val) throws IndexOutOfBoundsException {
     if (((row < 0) | (row >= this.height)) | ((col < 0) | (col >= this.width))) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     try {
       matrixArray.set("(" + row + "," + col + ")", val);
       return;
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
-    }
+    } //try/catch
   } // set(int, int, T)
 
   /**
@@ -132,7 +143,7 @@ public class MatrixV0<T> implements Matrix<T> {
    * @return the number of rows.
    */
   public int height() {
-    return height;   // STUB
+    return height;
   } // height()
 
   /**
@@ -141,7 +152,7 @@ public class MatrixV0<T> implements Matrix<T> {
    * @return the number of columns.
    */
   public int width() {
-    return width;   // STUB
+    return width;
   } // width()
 
   /**
@@ -156,24 +167,24 @@ public class MatrixV0<T> implements Matrix<T> {
   public void insertRow(int row) throws IndexOutOfBoundsException {
     if ((row < 0) | (row > this.height)) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     try {
       for (int i = this.height; i > row; i--) {
         for (int j = this.width - 1; j >= 0; j--) {
           T replacingVal = matrixArray.get("(" + (i - 1) + "," + j + ")");
           matrixArray.set("(" + i + "," + j + ")", replacingVal);
-        }
-      }
+        } //for
+      } //for
       for (int i = 0; i < this.width; i++) {
         matrixArray.set("(" + row + "," + i + ")", this.defaultVal);
-      }
+      } //for
       height++;
       return;
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
     } catch (KeyNotFoundException e) {
       throw new IndexOutOfBoundsException("key not found");
-    }
+    } //try/catch
   } // insertRow(int)
 
   /**
@@ -192,28 +203,28 @@ public class MatrixV0<T> implements Matrix<T> {
   public void insertRow(int row, T[] vals) throws ArraySizeException, IndexOutOfBoundsException {
     if ((row < 0) | (row > this.height)) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     if (vals.length != this.width) {
       throw new ArraySizeException();
     } else {
       try {
-        for (int i = this.height; i > row ; i--) {
+        for (int i = this.height; i > row; i--) {
           for (int j = this.width - 1; j >= 0; j--) {
-            T replacingVal = matrixArray.get("(" + (i -1) + "," + j + ")");
+            T replacingVal = matrixArray.get("(" + (i - 1) + "," + j + ")");
             matrixArray.set("(" + i + "," + j + ")", replacingVal);
-          }
-        }
+          } //for
+        } //for
         for (int i = 0; i < this.width; i++) {
           matrixArray.set("(" + row + "," + i + ")", vals[i]);
-        }
+        } //for
         height++;
         return;
       }  catch (NullKeyException e) {
         throw new IndexOutOfBoundsException("Key null");
       } catch (KeyNotFoundException e) {
         throw new IndexOutOfBoundsException("Key not found");
-      }
-    }
+      } //try/catch
+    } //if/else
   } // insertRow(int, T[])
 
   /**
@@ -228,24 +239,24 @@ public class MatrixV0<T> implements Matrix<T> {
   public void insertCol(int col) throws IndexOutOfBoundsException {
     if ((col < 0) | (col > this.width)) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     try {
       for (int i = this.width; i > col; i--) {
         for (int j = this.height - 1; j >= 0; j--) {
           T replacingVal = matrixArray.get("(" + j + "," + (i - 1) + ")");
           matrixArray.set("(" + j + "," + i + ")", replacingVal);
-        }
-      }
+        } //for
+      } //for
       for (int i = 0; i < this.height; i++) {
         matrixArray.set("(" + i + "," + col + ")", this.defaultVal);
-      }
+      } //for
       width++;
       return;
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
     } catch (KeyNotFoundException e) {
       throw new IndexOutOfBoundsException("Key not found");
-    }
+    } //try/catch
   } // insertCol(int)
 
   /**
@@ -264,7 +275,7 @@ public class MatrixV0<T> implements Matrix<T> {
   public void insertCol(int col, T[] vals) throws ArraySizeException, IndexOutOfBoundsException {
     if ((col < 0) | (col > this.width)) {
       throw new IndexOutOfBoundsException();
-    }
+    } //if
     if (vals.length != this.height) {
       throw new ArraySizeException();
     } else {
@@ -273,19 +284,19 @@ public class MatrixV0<T> implements Matrix<T> {
           for (int j = this.height - 1; j >= 0; j--) {
             T replacingVal = matrixArray.get("(" + j + "," + (i - 1) + ")");
             matrixArray.set("(" + j + "," + i + ")", replacingVal);
-          }
-        }
+          } //for
+        } //for
         for (int i = 0; i < this.height; i++) {
           matrixArray.set("(" + i + "," + col + ")", vals[i]);
-        }
+        } //for
         width++;
         return;
       }  catch (NullKeyException e) {
         throw new IndexOutOfBoundsException("Key null");
       } catch (KeyNotFoundException e) {
         throw new IndexOutOfBoundsException("Key not found");
-      }
-    }
+      } //try/catch
+    } //if/else
   } // insertCol(int, T[])
 
   /**
@@ -303,14 +314,14 @@ public class MatrixV0<T> implements Matrix<T> {
         for (int j = 0; j < this.width; j++) {
           T replacingVal = matrixArray.get("(" + (i + 1) + "," + j + ")");
           matrixArray.set("(" + i + "," + j + ")", replacingVal);
-        }
-      }
+        } //for
+      } //for
       this.height--;
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
     } catch (KeyNotFoundException e) {
       throw new IndexOutOfBoundsException("Key not found");
-    }
+    } //try/catch
   } // deleteRow(int)
 
   /**
@@ -328,14 +339,14 @@ public class MatrixV0<T> implements Matrix<T> {
         for (int j = 0; j < this.height; j++) {
           T replacingVal = matrixArray.get("(" + j + "," + (i + 1) + ")");
           matrixArray.set("(" + j + "," + i + ")", replacingVal);
-        }
-      }
+        } //for
+      } //for
       this.width--;
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
     } catch (KeyNotFoundException e) {
       throw new IndexOutOfBoundsException("key not found");
-    }
+    } //try/catch
   } // deleteRow(int)
 
   /**
@@ -361,11 +372,11 @@ public class MatrixV0<T> implements Matrix<T> {
       for (int i = startRow; i < endRow; i++) {
         for (int j = startCol; j < endCol; j++) {
           matrixArray.set("(" + i + "," + j + ")", val);
-        }
-      }
+        } //for
+      } //for
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
-    }
+    } //try/catch
   } // fillRegion(int, int, int, int, T)
 
   /**
@@ -392,12 +403,14 @@ public class MatrixV0<T> implements Matrix<T> {
   public void fillLine(int startRow, int startCol, int deltaRow, int deltaCol,
       int endRow, int endCol, T val) throws IndexOutOfBoundsException {
     try {
-      for (int i = 0; (startRow + i * deltaRow < endRow) | (startCol + i * deltaCol < endCol); i++) {
-        matrixArray.set("(" + (startRow + i * deltaRow) + "," + (startCol + i * deltaCol) + ")", val);
-      }
+      for (int i = 0; (startRow + i * deltaRow < endRow)
+            | (startCol + i * deltaCol < endCol); i++) {
+        matrixArray.set("(" + (startRow + i * deltaRow) + ","
+                          + (startCol + i * deltaCol) + ")", val);
+      } //for
     } catch (NullKeyException e) {
       throw new IndexOutOfBoundsException("Key null");
-    }
+    } //try/catch
   } // fillLine(int, int, int, int, int, int, T)
 
   /**
@@ -408,7 +421,7 @@ public class MatrixV0<T> implements Matrix<T> {
    * @return a copy of the matrix.
    */
   public Matrix clone() {
-    return this;        // STUB
+    return this;
   } // clone()
 
   /**
@@ -421,7 +434,7 @@ public class MatrixV0<T> implements Matrix<T> {
    * height, and equal elements; false otherwise.
    */
   public boolean equals(Object other) {
-    return this == other;       // STUB
+    return this.hashCode() == other.hashCode();
   } // equals(Object)
 
   /**

@@ -1,0 +1,3 @@
+Adjusted the .equals function for MatrixV0 to make use of the hash method to find equality.
+Note: MatrixExperimentsTest.java does not work, Professor Sam Rebelsky said it is ok that the test fails. It is due to some windows error.
+Fixed many many checkstyle errors, mostly found in MatrixV0.java and AssociativeArray.java
